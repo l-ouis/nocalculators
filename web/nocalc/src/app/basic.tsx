@@ -2,45 +2,16 @@
 'use client';
 
 import { MantineProvider, createTheme, MantineColorsTuple } from '@mantine/core';
-import { Stack, Button, Center, TextInput, Badge, Group } from '@mantine/core';
+import { Stack, Button, Center, TextInput, Badge } from '@mantine/core';
 import '@mantine/core/styles.css';
 import MathText from './mathText';
 import { fetchData } from './api';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Basic from './basic';
-import Menu from './menu';
-import MiscDisplay from './miscDisplay';
-
-const def: MantineColorsTuple = [
-  '#f3f3ff',
-  '#e2e6ee',
-  '#c6cbd4',
-  '#a9afbb',
-  '#8f96a5',
-  '#7f8798',
-  '#767f93',
-  '#636d80',
-  '#576175',
-  '#475369'
-];
-
-const theme = createTheme({
-  fontFamily: 'Roboto Slab, serif',
-  fontFamilyMonospace: 'Monaco, Courier, monospace',
-  headings: { fontFamily: 'Georgia, serif' },
-  colors: {
-    def,
-  }
-});
 
 
 
-{/*
-<MathText text="3 + 3 + \frac{2}{335}" />
-*/}
-
-export default function Home() {
+export default function Basic() {
 
   const [inpValue, setInpValue] = useState('');
   const [wrong, setWrong] = useState<string | undefined>('');
@@ -90,26 +61,43 @@ export default function Home() {
   };
 
   return (
-    <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-      {/* center + align all of this stuff in conditionals */}
-      <Center className="w-[100vw] h-[100vh]">
-        <Group>
-          <Stack>
-            <Group>
-              <Basic />
-              <Basic />
-            </Group>
-            <Group>
-              <Basic /> 
-              <Basic />
-            </Group>
-          </Stack>
-          <Stack>
-            <MiscDisplay />
-            <Menu />
-          </Stack>
-        </Group>
-      </Center>
-    </MantineProvider>
+    <div className="w-[32vw] h-[48vh]" >
+        <div className="rounded bg-slate-150 w-[100%] h-[100%]">
+        <Center style={{ width: '100%', height: '100%' }}>
+        <Stack>
+            <div style={{ height: '5rem' }}>
+            <MathText text={question} />
+            </div>
+            <div style={{ height: '5rem' }}>
+            <TextInput 
+                placeholder="Answer" 
+                value={inpValue}
+                error={wrong ? wrong : undefined}
+                onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    handleSubmission(e.currentTarget.value);
+                }
+                }}
+                onChange={(e) => setInpValue(e.currentTarget.value)}
+            />
+            <div style={{ width: '15rem' }}>
+                {badges.map((badge, index) => (
+                <>
+                    {index < 12 && (
+                    <>
+                        <Badge key={index} size="sm" color={badge === 1 ? "green" : "red"} variant="filled">
+                        {answers[index]}
+                        </Badge> 
+                        <span> </span>
+                    </>
+                    )}
+                </>
+                ))}
+            </div>
+            </div>
+        </Stack>
+        </Center>
+        </div>
+    </div>
   );
 }
