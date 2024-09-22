@@ -16,7 +16,8 @@
     "react": "^18",
     "react-dom": "^18",
     "rehype-katex": "^7.0.1",
-    "rehype-math": "^0.2.0"
+    "rehype-math": "^0.2.0",
+    "rgb-hex": "^4.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",
