@@ -11,7 +11,7 @@ export function generateKellyQuestion(): [string, number] {
 
     let answer = (winChance) - (1 - winChance)/(oddsWin / oddsLose);
     answer *= bankroll;
-    if (answer < 0) {
+    if (answer < 1) {
         answer = 0;
     }
     if (answer > bankroll) {

@@ -17,6 +17,7 @@ export default function Arithmetic( props: GameInfoProps ) {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [allQuestions, setAllQuestions] = useState<[string, number][]>(["\\text{Loading}", 0]);
 
+    
     const [timeLimit, setTimeLimit] = useState(0);
     const [difficulty, setDifficulty] = useState("easy");
 
@@ -52,6 +53,8 @@ export default function Arithmetic( props: GameInfoProps ) {
     const checkAnswer = (answer: string) => {
         if (parseInt(answer) === allQuestions[questionIndex][1]) {
             props.setPoints(props.points + 1);
+        } else {
+            props.setPoints(props.points - 1);
         }
         setQuestionIndex(questionIndex + 1);
         setInpValue('');

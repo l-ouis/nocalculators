@@ -55,10 +55,14 @@ export default function KellyCriterion( props: GameInfoProps ) {
         if (correctAnswer === 0) {
             if (userAnswer === 0) {
                 props.setPoints(props.points + 1);
+            } else {
+                props.setPoints(props.points - 1);
             }
         }
         else if (Math.abs(userAnswer - correctAnswer) / correctAnswer <= 0.1) { // 10% tolerance
             props.setPoints(props.points + 1);
+        } else {
+            props.setPoints(props.points - 1);
         }
         console.log(correctAnswer);
         setQuestionIndex(questionIndex + 1);
@@ -93,7 +97,7 @@ export default function KellyCriterion( props: GameInfoProps ) {
                     </div>
                     <div className="absolute items-center justify-center left-[-16vw] bottom-[-10.5vh]">
                         <TextInput 
-                            placeholder="Answer"
+                            placeholder="Bet Size"
                             className="w-[90%]"
                             value={inpValue}
                             onKeyDown={(e) => {
